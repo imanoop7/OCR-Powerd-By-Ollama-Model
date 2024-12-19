@@ -1,7 +1,5 @@
-from langchain_ollama import OllamaLLM
-from PIL import Image
 import json
-from typing import Optional, Dict, Any, List, Union
+from typing import Dict, Any, List, Union
 import os
 import base64
 import requests
@@ -9,13 +7,15 @@ from tqdm import tqdm
 import concurrent.futures
 from pathlib import Path
 import cv2
-import numpy as np
 from pdf2image import convert_from_path
 
 class OCRProcessor:
-    def __init__(self, model_name: str = "llama3.2-vision:11b", max_workers: int = 1):
+    def __init__(self, model_name: str = "llama3.2-vision:11b", 
+                 base_url: str = "http://localhost:11434/api/generate",
+                 max_workers: int = 1):
+        
         self.model_name = model_name
-        self.base_url = "http://localhost:11434/api/generate"
+        self.base_url = base_url
         self.max_workers = max_workers
 
     def _encode_image(self, image_path: str) -> str:

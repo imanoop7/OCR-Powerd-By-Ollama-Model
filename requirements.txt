@@ -1,4 +1,3 @@
-langchain_ollama
 Pillow
 requests
 python-magic
